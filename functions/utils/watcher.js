@@ -11,7 +11,7 @@ exports.watcher= async()=>{
         const curr= r.data.c;
         console.log(curr);
 
-          db.collection('stocks').doc(`${i}`).get()
+        await db.collection('stocks').doc(`${i}`).get()
                  .then(doc=>{
                            doc.data().Investors.forEach(element => {
 
@@ -28,7 +28,7 @@ exports.watcher= async()=>{
                                }
 
                      })
-                     return ''
+                   
                     })
                      .catch(err=>{
                          console.log(err);

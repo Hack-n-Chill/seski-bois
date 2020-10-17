@@ -4,19 +4,12 @@ const firebase=require('../utils/configure')
 const axios=require('axios');
 const {GetTotal}=require('../utils/watcher')
 
-function z(dat,stu,number)
-{
-   console.log("Called")
-   console.log(GetTotal(dat,stu,number));
-   return GetTotal(dat,stu,number);
-}
-
 exports.dashboard= async(req,res)=>{
   try
   {
-    const email=req.body.email;
+    const email=JSON.stringify(req.headers.email);
 
-  await db.doc(`users/${email}`).get()
+  await db.doc(`users/${JSON.parse(email)}`).get()
   .then(doc=>{
     if(doc.exists)
     {
@@ -42,7 +35,7 @@ exports.dashboard= async(req,res)=>{
             "profits": ans
           }
           return res.status(200).json(data);
-          
+
         }).catch(err=>{
           console.log(err)
         })

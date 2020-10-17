@@ -9,7 +9,7 @@ export class Stocks extends Component {
     }
   }
   componentDidMount(){
-  axios.get('/user/dashboard')
+  axios.get('http://localhost:5001/stocker-8a30b/asia-south1/stocker/user/dashboard')
   .then(res=>{
     console.log(res.data)
   })
