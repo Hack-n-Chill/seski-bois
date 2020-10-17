@@ -43,9 +43,14 @@ try
                     {
                         item.max_profit=1.2;
                     }
+                    if(item.numbers==="")
+                    {
+                        item.numbers=1;
+                    }
                     console.log(item.loss);
                     console.log(item.max_profit);
                     console.log(item.price);
+                    console.log(item.numbers);
 
                 let data= {
             Email: email,
@@ -120,7 +125,8 @@ exports.deletestocks = async (req,res)=>{
                                            "ticker":element.ticker,
                                            "max_profit":element.max_profit,
                                            "loss":element.loss,
-                                           "price":element.price
+                                           "price":element.price,
+                                           "numbers":element.numbers
                                        }
                                        let investor_data={
                                            "Email":email,
@@ -224,6 +230,11 @@ exports.updatestocks= async(req,res)=>{
                                              item.price==element.price
                                          }
                                          
+                                         if(item.numbers=="")
+                                         {
+                                             item.numbers=element.numbers
+                                         }
+
                                        let newuser={
                                         "Email":email,
                                         "max_profit":parseFloat(item.max_profit),
@@ -235,7 +246,8 @@ exports.updatestocks= async(req,res)=>{
                                         "ticker":item.ticker,
                                         "max_profit":item.max_profit,
                                         "loss":item.loss,
-                                        "price":item.price
+                                        "price":item.price,
+                                        "numbers":item.numbers
                                     }
                                 
                                     db.collection('users').doc(`${JSON.parse(email)}`).update({
