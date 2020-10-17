@@ -9,7 +9,7 @@ const Addthedata=(email,ticker)=>{
        stock_data:admin.firestore.FieldValue.arrayUnion(ticker)
    }).then(res=>{
        console.log("Added stock data to user")
-       return res.status(201).json({message:'Stock added successfully'})
+       //return res.status(201).json({message:'Stock added successfully'})
    }).catch(err=>{
        console.log(err);
    })
@@ -81,11 +81,11 @@ try
                       s.add(item.ticker);
                       console.log(s);
                        Addthedata(email,item);
-                       return ''
+                     
                   })
                   .then(res=>{
                       console.log("Added succesfully in console");
-                      return ''
+                    
                   })
                   .catch(err=>{
                       console.log(err);

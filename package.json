@@ -39,6 +39,6 @@
     "@babel/cli": "^7.12.1",
     "@babel/core": "^7.12.1",
     "@babel/preset-react": "^7.12.1"
-  },
-  "proxy": "http://localhost:5001/stocker-8a30b/asia-south1/stocker"
+  }
+
 }
