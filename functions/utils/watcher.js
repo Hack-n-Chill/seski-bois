@@ -3,6 +3,7 @@ const {admin,db}=require('../utils/admin');
 const firebase=require('../utils/configure');
 const axios=require('axios');
 const {key,key2}=require('../key');
+const {sendmail}=require('./email');
 exports.watcher= async()=>{
   try 
     {
@@ -11,7 +12,7 @@ exports.watcher= async()=>{
         const curr= r.data.c;
         console.log(curr);
 
-        await db.collection('stocks').doc(`${i}`).get()
+        await  db.collection('stocks').doc(`${i}`).get()
                  .then(doc=>{
                            doc.data().Investors.forEach(element => {
 
@@ -21,9 +22,11 @@ exports.watcher= async()=>{
                                if(percent>=element.max_profit)
                                {
                                    console.log(`The profit percent is reached by ${element.Email}`);
+                                   sendmail(JSON.stringify(element.Email))
                                }
                                else if(percent<=element.loss)
                                {
+                                   sendmail(JSON.stringify(element.Email))
                                    console.log(`The stock price is below the loss percent of ${element.Email}`);
                                }
 

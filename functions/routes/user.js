@@ -1,7 +1,6 @@
 const express =require('express')
 const {admin,db}=require('../utils/admin')
 const firebase=require('../utils/configure')
-const axios=require('axios');
 const {GetTotal}=require('../utils/watcher')
 
 exports.dashboard= async(req,res)=>{
