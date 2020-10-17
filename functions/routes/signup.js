@@ -9,6 +9,9 @@ exports.getsignup=async(req,res)=>{
 }
 
 exports.postsignup= async(req,res)=>{
+   try
+   {
+        let token,userId;
     const newUser={
         email:req.body.email,
         password:req.body.password,
@@ -19,20 +22,40 @@ exports.postsignup= async(req,res)=>{
     const { valid, errors } = validateSignupData(newUser);
 
   if (!valid) {return res.status(400).json(errors);}
-
-  auth.createUserWithEmailAndPassword(newUser.email,newUser.password)
-  .then(userCred=>{
-      return db.doc(`users/${userCred.user.email}`).set({
-          email:newUser.email,
-          name:newUser.name,
-          mobile:newUser.mobile,
-          addedAt:new Date().toISOString(),
-          stock_data: []
+ await db.doc(`user/${req.body.email}`).get().then(doc=>{
+    if(doc.exists)
+    {
+        return res.status(400).json({msg:"Account already in use"})
+    }
+    
+    auth.createUserWithEmailAndPassword(newUser.email,newUser.password)
+    .then((data) => {
+        userId = data.user.uid;
+        return data.user.getIdToken();
       })
-  }).then(()=>{
-    return res.status(201).json({msg:`User ${newUser.email} created successfully`})
+      .then((Idtoken)=>{
+         token=Idtoken;
+        return db.doc(`users/${req.body.email}`).set({
+            email:newUser.email,
+            name:newUser.name,
+            mobile:newUser.mobile,
+            addedAt:new Date().toISOString(),
+            stock_data: [],
+            userId
+        })
+      })
+     .then(()=>{
+         console.log(req.user)
+    return res.status(201).json({token})
   }).catch(err=>{
       console.log(`Bad Request : ${err.message}`)
   })
+ }
+ )
+}
+catch(err)
+{
+    console.log(err);
+}
 
 }

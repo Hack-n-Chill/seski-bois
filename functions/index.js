@@ -7,6 +7,8 @@ const { getlogout } = require('./routes/logout');
 const { getlogin, postlogin } = require('./routes/login');
 const {getstocks,deletestocks,updatestocks}=require('./routes/stocks');
 const {stockerpro}=require('./routes/mainwatcher');
+const fbAuth = require('./utils/fbAuth');
+
 const app=express();
 
 //Load CORS
@@ -44,7 +46,7 @@ app.delete('/stocks',deletestocks)
 app.put('/stocks',updatestocks)
 
 //Dashboard 
-app.get('/user/dashboard',dashboard)
+app.get('/user/dashboard',fbAuth,dashboard)
 app.delete('/user',deleteuser)
 
 //Continous function to watch stocks

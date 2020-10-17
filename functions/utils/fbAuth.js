@@ -10,17 +10,16 @@ module.exports=(req,res,next)=>{
   }
   admin.auth().verifyIdToken(idToken)
   .then(decodedToken=>{
-    req.email=decodedToken
+    req.user=decodedToken
     console.log(decodedToken)
-    return db.collection('users').where('userId','==',req.email.uid).limit(1).get()
+    return db.collection('users').where('userId','==',req.user.uid).limit(1).get()
   }).then(data=>{
-   req.user.handle=data.docs[0].data().handle
-   req.user.imageUrl=data.docs[0].data().imageUrl
+   req.user.uid=data.docs[0].data().uid
    return next()
   })
     .catch(err=>{
       console.error('Error while verifying token',err)
       return res.status(403).json(err)
     })
-    return ''
+    //return ''
 }
