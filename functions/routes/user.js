@@ -2,9 +2,14 @@ const express =require('express')
 const {admin,db}=require('../utils/admin')
 const firebase=require('../utils/configure')
 const axios=require('axios');
-const {key2}=require('../key');
 const {GetTotal}=require('../utils/watcher')
 
+function z(dat,stu,number)
+{
+   console.log("Called")
+   console.log(GetTotal(dat,stu,number));
+   return GetTotal(dat,stu,number);
+}
 
 exports.dashboard= async(req,res)=>{
   try
@@ -27,16 +32,21 @@ exports.dashboard= async(req,res)=>{
        console.log(stu);
        console.log(dat);
        console.log(number);
-       let data={
-         "addedAt":doc.data().addedAt,
-         "email":doc.data().email,
-         "mobile":doc.data().mobile,
-         "name":doc.data().name,
-         "stock_data":doc.data().stock_data,
-         "profits": GetTotal(dat,stu,number)
-       }
-       
-       return res.status(200).json(data);
+         GetTotal(dat,stu,number).then((ans)=>{
+          let data={
+            "addedAt":doc.data().addedAt,
+            "email":doc.data().email,
+            "mobile":doc.data().mobile,
+            "name":doc.data().name,
+            "stock_data":doc.data().stock_data,
+            "profits": ans
+          }
+          return res.status(200).json(data);
+          
+        }).catch(err=>{
+          console.log(err)
+        })
+      
     }
     else
     {
