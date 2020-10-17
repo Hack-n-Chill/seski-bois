@@ -36,6 +36,9 @@ class SignUp extends React.Component {
     axios.post('/signup',userData)
     .then(res=>{
       console.log(res.data)
+      this.props.history.push('/')
+    }).catch(err=>{
+      console.log(err.message,err.code)
     })
   }
 

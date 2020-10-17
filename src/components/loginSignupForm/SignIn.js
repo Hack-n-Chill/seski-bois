@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import './form.css'
 
 class SignIn extends React.Component {
@@ -16,6 +17,17 @@ class SignIn extends React.Component {
     this.setState({
       email:'',
       password:''
+    })
+    const userData={
+      email:this.state.email,
+      password:this.state.password
+    }
+    axios.post('/login',userData)
+    .then(res=>{
+      console.log(res.data)
+      this.props.history.push('/')
+    }).catch(err=>{
+      console.log(err.message,err.code)
     })
   }
 
