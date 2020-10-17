@@ -36,6 +36,7 @@ class SignUp extends React.Component {
     axios.post('/signup',userData)
     .then(res=>{
       console.log(res.data)
+      localStorage.setItem('fbAuthToken',`Bearer ${res.data.token}`)
       this.props.history.push('/')
     }).catch(err=>{
       console.log(err.message,err.code)

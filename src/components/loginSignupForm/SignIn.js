@@ -25,6 +25,7 @@ class SignIn extends React.Component {
     axios.post('/login',userData)
     .then(res=>{
       console.log(res.data)
+      localStorage.setItem('fbAuthToken',`Bearer ${res.data.token}`)
       this.props.history.push('/')
     }).catch(err=>{
       console.log(err.message,err.code)
