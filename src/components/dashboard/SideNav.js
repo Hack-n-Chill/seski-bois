@@ -23,7 +23,7 @@ export class SideNav extends Component {
     </div>
     </li>
        <li><a href="#!">User Profile</a></li>
-       <li>Stocks</li>
+       <li><a className="waves-effect" href="#!">Stocks</a></li>
        <li><a className="waves-effect" href="#!">Notifications</a></li>
        <li><a className="waves-effect" href="#!">Add Stocks</a></li>
       </ul>

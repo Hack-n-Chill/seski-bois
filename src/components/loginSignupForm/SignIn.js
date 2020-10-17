@@ -28,7 +28,7 @@ class SignIn extends React.Component {
  render(){
   return (
     <React.Fragment>
-       <form className="sign-in-form" onSubmit={this.handleSubmit}>
+       <form className="sign-in-form" onSubmit={this.handleSubmit} method="POST" action="/login">
             <h2 className="tit">Sign in</h2>
             <div className="in-field">
               <i className="fas fa-envelope"></i>

@@ -5,6 +5,7 @@ const axios=require('axios');
 const {GetTotal}=require('../utils/watcher')
 
 exports.dashboard= async(req,res)=>{
+  
   try
   {
     const email=JSON.stringify(req.headers.email);
