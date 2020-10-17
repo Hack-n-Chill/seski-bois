@@ -9,6 +9,7 @@ const Addthedata=(email,ticker)=>{
        stock_data:admin.firestore.FieldValue.arrayUnion(ticker)
    }).then(res=>{
        console.log("Added stock data to user")
+       return res.status(201).json({message:'Stock added successfully'})
    }).catch(err=>{
        console.log(err);
    })
@@ -75,9 +76,11 @@ try
                       s.add(item.ticker);
                       console.log(s);
                        Addthedata(email,item);
+                       return ''
                   })
                   .then(res=>{
                       console.log("Added succesfully in console");
+                      return ''
                   })
                   .catch(err=>{
                       console.log(err);
@@ -131,6 +134,7 @@ exports.deletestocks = async (req,res)=>{
                                        
                                     db.collection('users').doc(`${JSON.parse(email)}`).update({
                                         stock_data:admin.firestore.FieldValue.arrayRemove(data)
+                                        
                                     }).then(res=>{
                                         console.log(`Removed stock ${item.ticker}`);
                                         console.log(investor_data);
