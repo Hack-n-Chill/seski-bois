@@ -1,5 +1,7 @@
+import Axios from 'axios'
 import React from 'react'
 import {Link} from 'react-router-dom'
+import axios from 'axios'
 import './form.css'
 
 class SignUp extends React.Component {
@@ -17,12 +19,23 @@ class SignUp extends React.Component {
   handleSubmit=e=>{
     e.preventDefault()
     console.log(this.state)
-    this.setState({
-      name:'',
-      email:'',
-      mobile:'',
-      password:'',
-      confirmPassword:''
+    // this.setState({
+    //   name:'',
+    //   email:'',
+    //   mobile:'',
+    //   password:'',
+    //   confirmPassword:''
+    // })
+    const userData={
+      name:this.state.name,
+      email:this.state.email,
+      mobile:this.state.mobile,
+      password:this.state.password,
+      confirmPassword:this.state.confirmPassword
+    }
+    axios.post('/signup',userData)
+    .then(res=>{
+      console.log(res.data)
     })
   }
 
@@ -35,7 +48,7 @@ class SignUp extends React.Component {
   render(){
     return (
       <React.Fragment>
-        <form className="sign-up-form" onSubmit={this.handleSubmit}>
+        <form className="sign-up-form" onSubmit={this.handleSubmit} action="/signup" method="POST">
               <h2 className="tit">Sign up</h2>
               <div className="in-field">
                 <i className="fas fa-user"></i>
