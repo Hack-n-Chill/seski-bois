@@ -10,7 +10,7 @@ to make a web app which would constantly monitor the stock prices and would noti
 
  1. Signup or signin to the website.
  2. Add the stock details.
- 3. The stocks are being constantly fetched using finnhub.io.
+ 3. The stock prices are being constantly fetched 
  4. If the profit percentage is reached,a mail is sent to the user using Nodemailer.
 
 ### Tech
