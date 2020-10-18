@@ -15,8 +15,8 @@ to make a web app which would constantly monitor the stock prices and would noti
 
 ### Tech
  Stocker uses the following tech stack-
- ReactJS-frontend
- Firebase,Express-backend
+ 1. ReactJS-frontend
+ 2. Firebase,Express-backend
 
 ### `npm start`
 
